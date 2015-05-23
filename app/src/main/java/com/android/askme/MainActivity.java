@@ -9,18 +9,29 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    private Button startbutton;
+    private Button startcabutton;
+    private Button startgabutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startbutton = (Button) findViewById(R.id.startbtn);
-        startbutton.setOnClickListener(new View.OnClickListener() {
+        startcabutton = (Button) findViewById(R.id.startbtnca);
+        startcabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+                Intent intent = new Intent(MainActivity.this, CAQuizActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        startgabutton = (Button) findViewById(R.id.startbtnga);
+        startgabutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GAQuizActivity.class);
                 startActivity(intent);
                 finish();
             }

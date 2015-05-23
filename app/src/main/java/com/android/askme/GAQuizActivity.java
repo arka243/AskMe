@@ -2,16 +2,12 @@ package com.android.askme;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,14 +17,13 @@ import java.util.HashMap;
 import java.util.Random;
 
 
-public class QuizActivity extends Activity {
-    TextView txtQuestion;
-    RadioButton rda, rdb, rdc, rdd;
-    Button butNext, butEnd;
-    int correct = 0;
-//    int qnum = 1;
-    String[] qsplit;
-    static HashMap<Integer, String> qList = new HashMap<Integer, String>();
+public class GAQuizActivity extends Activity {
+    private TextView txtQuestion;
+    private RadioButton rda, rdb, rdc, rdd;
+    private Button butNext, butEnd;
+    private int correct = 0;
+    private String[] qsplit;
+    private HashMap<Integer, String> qList = new HashMap<Integer, String>();
 
     public class CSVFile {
 
@@ -74,8 +69,8 @@ public class QuizActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
-        InputStream inputstream = getResources().openRawResource(R.raw.questions);
+        setContentView(R.layout.activity_gaquiz);
+        InputStream inputstream = getResources().openRawResource(R.raw.gaquestions);
         CSVFile csvfile = new CSVFile(inputstream);
         qList = csvfile.read();
 
@@ -104,7 +99,7 @@ public class QuizActivity extends Activity {
                 if(qsplit[5].equals(answer.getText().toString())) {
                     correct = 1;
                 }
-                Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                Intent intent = new Intent(GAQuizActivity.this, GAResultActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("correct", correct);
                 intent.putExtras(b);
@@ -117,7 +112,7 @@ public class QuizActivity extends Activity {
         butEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(QuizActivity.this, MainActivity.class);
+                Intent intent = new Intent(GAQuizActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
